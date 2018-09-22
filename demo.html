@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<img id="img">
+<br/>
+<form id="form">
+<input type="file" name="file" id="fileItem" onchange="onClick()" >
+
+<input type="submit" value="Play"  >
+</form>
+<script type="text/javascript">
+
+    var URL = window.URL || window.webkitURL;
+    var videoSrc = document.getElementById('img');
+    function onClick() {
+
+        var fileItem = document.getElementById('fileItem');
+        var files = fileItem.files;
+        var file = files[0];
+        var url = URL.createObjectURL(file);
+        videoSrc.src = url;
+        document.getElementById('form').innerHTML+='<input type="text" name =\'blob\' value ="'+url+'">'
+        alert(videoSrc.src);
+    }
+</script>
+</body>
+</html>

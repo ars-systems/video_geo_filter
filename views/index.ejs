@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+<img id="img">
+<div class="jumbotron text-center">
+    <div id="uploadDiv">
+        <form id="frmUploader" enctype="multipart/form-data" action="api/Upload/" method="post">
+            <input id ="blob" name="blob" value="" type="text">
+            <input id="inputFile" type="file" name="imgUploader"   value=""  multiple/>
+            <input id="btnSubmit" type="submit" name="submit"  value="Upload"/>
+        </form>
+        <button onclick="onClick()">BLOB</button>
+    </div>
+</div>
+<div id="login_country">
+
+</div>
+<script>
+    (function loadDoc() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var data = this.responseText;
+                document.getElementById('login_country').innerHTML = '<form action="/videos" method="post">'+'<input type="hidden" name="country" value="' + (JSON.parse(data).country_name)+'">'+'<input type="submit" value="VIDEO"/>'+'</form>'
+
+            }
+        };
+        xhttp.open("GET", "https://ipapi.co/json", true);
+        xhttp.send();
+    })();
+
+    var URL = window.URL || window.webkitURL;
+    var videoSrc = document.getElementById('img');
+    function onClick() {
+
+        var fileItem = document.getElementById('fileItem');
+        var files = fileItem.files;
+        var file = files[0];
+        var url = URL.createObjectURL(file);
+        videoSrc.src = url;
+        alert(videoSrc.src);
+    }
+
+</script>
+</body>
+</html>
